@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => {
       transform: "translate(-50%, -50%)",
       display: "flex",
       flexDirection: "column",
+      color: "#fff",
     },
 
     titleButton: {

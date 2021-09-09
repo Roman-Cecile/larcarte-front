@@ -1,10 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Searchbar from "../Mobile/Searchbar";
+
+// STYLES
 import useStyles from "../../styles/Home";
+
+//MUI
 import { Button, Typography } from "@material-ui/core";
+
+// COMPONENTS
 import Cities from "./Cities";
 import Restorer from "./Restorer";
+import Footer from "../Footer";
+import Searchbar from "../Mobile/Searchbar";
 
 const Home = (props) => {
   const classes = useStyles();
@@ -30,6 +37,7 @@ const Home = (props) => {
         {/* .................RESTORER................. */}
         <Restorer />
       </div>
+      <Footer />
     </>
   );
 };

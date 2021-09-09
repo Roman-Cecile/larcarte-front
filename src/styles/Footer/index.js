@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     zIndex: -1,
     borderTop: "1px solid #DDDDDD",
+    bottom: 0,
   },
 
   list: {
