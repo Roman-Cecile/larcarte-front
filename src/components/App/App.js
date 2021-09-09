@@ -7,6 +7,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 // Components
 import Home from "../Home";
 import Login from "../LogForm";
+import Restaurant from "../Restaurant";
 
 // Router dom
 import { Route, Switch } from "react-router-dom";
@@ -28,6 +29,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/restaurant" component={Restaurant} />
       </Switch>
     </>
   );
