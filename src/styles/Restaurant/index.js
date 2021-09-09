@@ -6,14 +6,32 @@ const useStyles = makeStyles((theme) => {
     borderBottom: "1px solid #e0dddd",
   };
 
+  const main = {
+    position: "relative",
+  };
+
+  const map = {
+    marginTop: 8,
+  };
+
   return {
     flex: {
       display: "flex",
     },
 
-    main: {
+    mainMobile: {
+      ...main,
       margin: 18,
-      position: "relative",
+    },
+
+    mainDesktop: {
+      margin: "18px 400px",
+      ...main,
+    },
+
+    mainTablet: {
+      margin: "18px 100px",
+      ...main,
     },
 
     section: {
@@ -43,6 +61,16 @@ const useStyles = makeStyles((theme) => {
       background: "-webkit-linear-gradient(90deg, #6F019C 0%, #C6017E 135.12%)",
       color: "#fff",
       fontWeight: "bold",
+    },
+
+    containerMapMobile: {
+      ...map,
+      width: "100%",
+    },
+
+    containerMapDesktop: {
+      ...map,
+      width: 300,
     },
   };
 });

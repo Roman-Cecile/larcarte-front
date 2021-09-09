@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 // STYLES
 import useStyles from "../../styles/Restaurant";
+// MUI MEDIA QUERIES
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // MUI
 import { Button, Typography } from "@material-ui/core";
@@ -36,6 +38,8 @@ const data = {
 
 const Restaurant = (props) => {
   const classes = useStyles();
+  const mobile = useMediaQuery("(max-width:600px)");
+  const tablet = useMediaQuery("(max-width:1025px)");
 
   let isVeganFriendly;
   if (data.vegan) {
@@ -76,7 +80,14 @@ const Restaurant = (props) => {
 
       {/*...........................Content........................... */}
 
-      <main className={classes.main}>
+      <main
+        className={
+          mobile
+            ? classes.main
+            : tablet
+            ? classes.mainTablet
+            : classes.mainDesktop
+        }>
         {/* NAME - MARK - CITY - COUNTRY */}
 
         <section className={classes.section}>
@@ -138,14 +149,18 @@ const Restaurant = (props) => {
         {/* MAP */}
 
         <section style={{ marginTop: 25 }}>
-          <Typography component="p" variant="h5">
-            Où se situe le restaurant
-          </Typography>
-          <Typography component="p">{data.address}</Typography>
+          <div style={{ margin: 8 }}>
+            <Typography component="p" variant="h5">
+              Où se situe le restaurant
+            </Typography>
+            <Typography component="p">{data.address}</Typography>
+          </div>
           <img
             src={carte}
             alt="carte"
-            style={{ marginTop: 8, width: "100%" }}
+            className={
+              mobile ? classes.containerMapMobile : classes.containerMapDesktop
+            }
           />
         </section>
       </main>
