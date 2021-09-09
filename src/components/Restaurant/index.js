@@ -18,6 +18,7 @@ import {
 // COMPONENTS
 import Footer from "../Footer";
 import Map from "../Map";
+import Carousel from "../ImageList";
 
 const data = {
   name: "Le magnifique",
@@ -59,25 +60,7 @@ const Restaurant = (props) => {
     <>
       {/*...........................Carousel........................... */}
 
-      <header>
-        <div
-          style={{
-            width: "100%",
-            height: "25vh",
-            backgroundColor: "grey",
-            position: "relative",
-          }}>
-          <Typography
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-            }}>
-            Carousel
-          </Typography>
-        </div>
-      </header>
+      <Carousel />
 
       {/*...........................Content........................... */}
 
