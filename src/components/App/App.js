@@ -3,8 +3,13 @@ import NavbarDesktop from "../Desktop/Navbar";
 
 // MUI MEDIA QUERIES
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+// Components
 import Home from "../Home";
-import Footer from "../Footer";
+import Login from "../LogForm";
+
+// Router dom
+import { Route, Switch } from "react-router-dom";
 
 const App = () => {
   const matches = useMediaQuery("(max-width:600px)");
@@ -20,8 +25,10 @@ const App = () => {
   return (
     <>
       {navbar}
-      <Home />
-      <Footer />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+      </Switch>
     </>
   );
 };
