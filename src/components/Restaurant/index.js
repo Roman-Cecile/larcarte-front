@@ -15,11 +15,9 @@ import {
   Euro as EuroICon,
 } from "@material-ui/icons";
 
-// IMG
-import carte from "../../images/exemplemap.png";
-
 // COMPONENTS
 import Footer from "../Footer";
+import Map from "../Map";
 
 const data = {
   name: "Le magnifique",
@@ -34,8 +32,11 @@ const data = {
     "Charmant appartement coloré, de 29 m2, composé d'une chambre, une salle de séjour, une cuisine, une salle de bains et un balcon. Près du centre du Marais, le quartier le plus branché de la ville, c'est la solution idéale pour des courts séjours riches en amusement.",
   vegan: true,
   menu: "",
+  coords: {
+    x: 3.903335913740044,
+    y: 43.59908136314234,
+  },
 };
-
 const Restaurant = (props) => {
   const classes = useStyles();
   const mobile = useMediaQuery("(max-width:600px)");
@@ -155,13 +156,7 @@ const Restaurant = (props) => {
             </Typography>
             <Typography component="p">{data.address}</Typography>
           </div>
-          <img
-            src={carte}
-            alt="carte"
-            className={
-              mobile ? classes.containerMapMobile : classes.containerMapDesktop
-            }
-          />
+          <Map coords={data.coords} restaurantName={data.name} />
         </section>
       </main>
       <Footer />
