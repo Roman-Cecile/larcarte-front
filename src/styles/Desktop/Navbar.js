@@ -26,13 +26,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bolder",
     fontSize: "2rem",
   },
-
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
 }));
 
 export default useStyles;
