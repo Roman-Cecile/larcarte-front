@@ -8,6 +8,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Home from "../Home";
 import Login from "../LogForm";
 import Restaurant from "../Restaurant";
+import User from "../User";
+import Favorite from "../Favorite";
 
 // Router dom
 import { Route, Switch } from "react-router-dom";
@@ -32,6 +34,8 @@ const App = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/restaurant/:name" component={Restaurant} />
         <Route exact path="/ville/:city" component={City} />
+        <Route exact path="/u/:id/favoris" component={Favorite} />
+        <Route exact path="/u/:id" component={User} />
       </Switch>
     </>
   );
