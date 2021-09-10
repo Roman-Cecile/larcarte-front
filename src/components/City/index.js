@@ -7,6 +7,7 @@ import ImageGallery from "react-image-gallery";
 
 // MUI MEDIA QUERIES
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useHistory } from "react-router-dom";
 
 const data = [
   {
@@ -78,6 +79,8 @@ const City = (props) => {
   Object.keys(getElement).map(
     (element) => (getElement[element].style.border = "solid 1px #b3b3b3")
   );
+
+  const history = useHistory();
   return (
     <div>
       <header style={{ paddingBottom: 25, borderBottom: "solid 1px #d6d6d6" }}>
@@ -100,6 +103,7 @@ const City = (props) => {
           style={{ display: "flex", flexDirection: mobile ? "column" : "row" }}>
           {data.map((restaurant) => (
             <div
+              onClick={() => history.push(`/restaurant/${restaurant.name}`)}
               key={restaurant.name}
               style={{
                 margin: mobile ? "16px 8px" : 16,

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => {
     },
 
     mainDesktop: {
-      margin: "18px 400px",
+      margin: "18px 500px",
       ...main,
     },
 
