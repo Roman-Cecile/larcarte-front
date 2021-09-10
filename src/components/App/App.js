@@ -11,6 +11,7 @@ import Restaurant from "../Restaurant";
 
 // Router dom
 import { Route, Switch } from "react-router-dom";
+import City from "../City";
 
 const App = () => {
   const matches = useMediaQuery("(max-width:600px)");
@@ -30,6 +31,7 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/restaurant" component={Restaurant} />
+        <Route exact path="/ville/:city" component={City} />
       </Switch>
     </>
   );

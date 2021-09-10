@@ -56,9 +56,8 @@ export default class index extends Component {
     });
 
     // BUILD MAP
-    new Map({
+    const map = new Map({
       target: "map",
-
       interactions: interactionDefaults({
         pinchRotate: false,
         shiftDragZoom: false,
@@ -97,8 +96,20 @@ export default class index extends Component {
         maxZoom: 20,
       }),
     });
+
+    this.map = map;
   }
   render() {
-    return <div id="map" style={{ width: "100%", height: 400 }}></div>;
+    const { classes } = this.props;
+
+    const openLauerMap = this;
+    setTimeout(function () {
+      openLauerMap.map.updateSize();
+    }, 200);
+    return (
+      <>
+        <div id="map" className={classes.map}></div>
+      </>
+    );
   }
 }

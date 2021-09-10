@@ -73,6 +73,11 @@ const useStyles = makeStyles((theme) => {
       ...map,
       width: 300,
     },
+
+    map: {
+      height: 400,
+      with: "100%",
+    },
   };
 });
 
