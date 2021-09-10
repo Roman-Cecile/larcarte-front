@@ -110,7 +110,7 @@ const Restaurant = (props) => {
           </div>
           <Typography component="p" className={classes.flex}>
             <EuroICon style={{ fontSize: "1rem" }} />
-            <Typography component="p">
+            <Typography component="span">
               {data.minPrice}/ {data.maxPrice}
             </Typography>
           </Typography>
@@ -139,7 +139,11 @@ const Restaurant = (props) => {
             </Typography>
             <Typography component="p">{data.address}</Typography>
           </div>
-          <Map coords={data.coords} restaurantName={data.name} />
+          <Map
+            coords={data.coords}
+            restaurantName={data.name}
+            classes={classes}
+          />
         </section>
       </main>
       <Footer />

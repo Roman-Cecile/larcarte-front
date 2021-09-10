@@ -11,6 +11,7 @@ import {
 
 // MUI STYLES
 import { makeStyles } from "@material-ui/core/styles";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -33,9 +34,15 @@ const Navbar = (props) => {
       }}
       showLabels
       className={classes.root}>
-      <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-      <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+      <NavLink to="/">
+        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+      </NavLink>
+      <NavLink to="/restaurant">
+        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+      </NavLink>
+      <NavLink to="/login">
+        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+      </NavLink>
     </BottomNavigation>
   );
 };

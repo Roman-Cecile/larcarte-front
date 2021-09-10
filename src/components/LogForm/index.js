@@ -28,7 +28,7 @@ const LogForm = (props) => {
           <form>
             <TextField
               fullWidth
-              id="outlined-basic"
+              id="email"
               label="Email"
               variant="outlined"
               required
@@ -39,7 +39,7 @@ const LogForm = (props) => {
             />
             <TextField
               fullWidth
-              id="outlined-basic"
+              id="password"
               label="Password"
               variant="outlined"
               type="password"
