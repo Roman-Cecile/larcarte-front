@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import {
   Explore as ExploreIcon,
+  Favorite as FavoriteIcon,
   Home as HomeIcon,
   Person as PersonIcon,
 } from "@material-ui/icons";
@@ -41,7 +42,12 @@ const Navbar = (props) => {
         icon={<HomeIcon />}
       />
       <BottomNavigationAction
-        onClick={() => history.push("/login")}
+        onClick={() => history.push("/u/0/favoris")}
+        label="Favoris"
+        icon={<FavoriteIcon />}
+      />
+      <BottomNavigationAction
+        onClick={() => history.push("/u/0")}
         label="Compte"
         icon={<PersonIcon />}
       />

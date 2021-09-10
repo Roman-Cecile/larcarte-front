@@ -98,7 +98,7 @@ const City = (props) => {
         </section>
       </header>
 
-      <main style={{ marginTop: 16 }}>
+      <main style={{ margin: 30 }}>
         <div
           style={{ display: "flex", flexDirection: mobile ? "column" : "row" }}>
           {data.map((restaurant) => (

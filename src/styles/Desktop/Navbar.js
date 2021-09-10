@@ -10,13 +10,14 @@ const useStyles = makeStyles((theme) => ({
   },
 
   iconLogin: {
-    color: "#fff",
+    color: "#000",
   },
 
   container: {
     position: "fixed",
     left: 0,
     right: 0,
+    top: 0,
     zIndex: 1,
     display: "flex",
     justifyContent: "space-between",
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: "bolder",
     fontSize: "2rem",
+    color: "#000",
   },
 }));
 
