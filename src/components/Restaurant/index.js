@@ -7,18 +7,20 @@ import useStyles from "../../styles/Restaurant";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // MUI
-import { Button, Typography } from "@material-ui/core";
+import { Button, IconButton, Typography } from "@material-ui/core";
 import {
   Stars as StarsIcon,
   Eco as EcoIcon,
   Restaurant as RestaurantIcon,
   Euro as EuroICon,
+  ArrowBack as ArrowBackIcon,
 } from "@material-ui/icons";
 
 // COMPONENTS
 import Footer from "../Footer";
 import Map from "../Map";
 import Carousel from "../ImageList";
+import { useHistory } from "react-router-dom";
 
 const data = {
   name: "Le magnifique",
@@ -40,6 +42,7 @@ const data = {
 };
 const Restaurant = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   const mobile = useMediaQuery("(max-width:600px)");
   const tablet = useMediaQuery("(max-width:1025px)");
 
@@ -56,11 +59,30 @@ const Restaurant = (props) => {
     );
   }
 
+  let goBackButton;
+  if (mobile) {
+    goBackButton = (
+      <IconButton
+        size="small"
+        style={{
+          position: "absolute",
+          top: 20,
+          left: 20,
+          backgroundColor: "#fff",
+          color: "#000",
+        }}
+        onClick={() => history.goBack()}>
+        <ArrowBackIcon />
+      </IconButton>
+    );
+  }
+
   return (
     <>
       {/*...........................Carousel........................... */}
 
       <Carousel />
+      {goBackButton}
 
       {/*...........................Content........................... */}
 
