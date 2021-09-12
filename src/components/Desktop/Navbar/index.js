@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 // STYLES
 import useStyles from "../../../styles/Desktop/Navbar";
@@ -15,12 +15,16 @@ import {
 import { AccountCircle } from "@material-ui/icons";
 
 // COMPONENTS
-import LogForm from "../../LogForm";
+import { LoginForm } from "../../../containers/LoginForm";
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   // Toggle dialog
   const [open, setOpen] = React.useState(false);
+
+  const toggleDialog = () => {
+    setOpen(!open);
+  };
 
   return (
     <>
@@ -38,7 +42,7 @@ export default function PrimarySearchAppBar() {
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton
-                onClick={() => setOpen(true)}
+                onClick={toggleDialog}
                 className={classes.iconLogin}
                 size="medium"
                 edge="end"
@@ -53,10 +57,10 @@ export default function PrimarySearchAppBar() {
       {/* .................DIALOG LOG................. */}
       <Dialog
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={toggleDialog}
         aria-labelledby="form-dialog-login">
         <DialogContent>
-          <LogForm />
+          <LoginForm />
         </DialogContent>
       </Dialog>
     </>

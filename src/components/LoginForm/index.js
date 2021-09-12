@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 // MUI
@@ -9,10 +9,16 @@ import { Facebook as FacebookIcon } from "@material-ui/icons";
 import { ReactComponent as Logo } from "../../images/googleIcon.svg";
 
 // STYLES
-import useStyles from "../../styles/LogForm";
+import useStyles from "../../styles/LoginForm";
 
-const LogForm = (props) => {
+const LoginForm = ({ submitLogin }) => {
   const classes = useStyles();
+  const [input, setInput] = useState({ email: "", password: "" });
+
+  const handleChange = (event, type) => {
+    setInput((prevState) => ({ ...prevState, [type]: event.target.value }));
+  };
+
   return (
     <>
       <header className={classes.header}>
@@ -25,13 +31,15 @@ const LogForm = (props) => {
 
       <main className={classes.main}>
         <section>
-          <form>
+          <form onSubmit={(event) => submitLogin(event, input)}>
             <TextField
               fullWidth
               id="email"
+              value={input.email}
               label="Email"
               variant="outlined"
               required
+              onChange={(event) => handleChange(event, "email")}
               className={classes.textFieldEmail}
               InputProps={{
                 className: classes.inputProps,
@@ -40,7 +48,9 @@ const LogForm = (props) => {
             <TextField
               fullWidth
               id="password"
+              value={input.password}
               label="Password"
+              onChange={(event) => handleChange(event, "password")}
               variant="outlined"
               type="password"
               required
@@ -49,7 +59,11 @@ const LogForm = (props) => {
                 className: classes.inputProps,
               }}
             />
-            <Button fullWidth size="large" className={classes.buttonLog}>
+            <Button
+              type="submit"
+              fullWidth
+              size="large"
+              className={classes.buttonLog}>
               Continuer
             </Button>
           </form>
@@ -83,6 +97,8 @@ const LogForm = (props) => {
   );
 };
 
-LogForm.propTypes = {};
+LoginForm.propTypes = {
+  submitLogin: PropTypes.func.isRequired,
+};
 
-export default LogForm;
+export default LoginForm;
