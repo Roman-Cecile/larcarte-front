@@ -15,7 +15,7 @@ import { Route, Switch } from "react-router-dom";
 import City from "../City";
 
 // Containers
-import { LoginForm } from "../../containers/LoginForm";
+import { Form } from "../../containers/Form";
 
 const App = () => {
   const matches = useMediaQuery("(max-width:600px)");
@@ -35,14 +35,21 @@ const App = () => {
       {navbar}
       <Switch>
         <Route exact path="/" component={Home} />
-        {isLog ? (
-          <Route exact path="/u/:id" component={User} />
-        ) : (
-          <Route exact path="/login" component={LoginForm} />
-        )}
         <Route exact path="/restaurant/:name" component={Restaurant} />
         <Route exact path="/ville/:city" component={City} />
-        <Route exact path="/u/:id/favoris" component={Favorite} />
+        {isLog ? (
+          <Route path="/u">
+            <Switch>
+              <Route exact path="/u/:id" component={User} />
+              <Route exact path="/u/:id/favoris" component={Favorite} />
+              <Route>404</Route>
+            </Switch>
+          </Route>
+        ) : (
+          <>
+            <Route exact path="/connexion" component={Form} />
+          </>
+        )}
         <Route>404</Route>
       </Switch>
     </>

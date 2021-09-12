@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    backgroundColor: "transparent",
+    backgroundColor: "#0b4c5d",
   },
 
   grow: {
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   iconLogin: {
-    color: "#000",
+    color: "#fff",
   },
 
   container: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: "bolder",
     fontSize: "2rem",
-    color: "#000",
+    color: "#fff",
   },
 }));
 

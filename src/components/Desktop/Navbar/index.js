@@ -12,13 +12,16 @@ import {
   Dialog,
   DialogContent,
 } from "@material-ui/core";
-import { AccountCircle } from "@material-ui/icons";
+import { AccountCircle, Explore as ExploreIcon } from "@material-ui/icons";
+
+import { useHistory } from "react-router-dom";
 
 // COMPONENTS
-import { LoginForm } from "../../../containers/LoginForm";
+import { Form } from "../../../containers/Form";
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
+  const history = useHistory();
   // Toggle dialog
   const [open, setOpen] = React.useState(false);
 
@@ -35,12 +38,24 @@ export default function PrimarySearchAppBar() {
           classes={{ colorPrimary: classes.appbar }}
           elevation={0}>
           <Toolbar>
-            <Typography className={classes.title} variant="h6" noWrap>
+            <Typography
+              onClick={() => history.push("/")}
+              className={classes.title}
+              variant="h6"
+              noWrap>
               La Carte
             </Typography>
 
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+              <IconButton
+                onClick={() => history.push("/map")}
+                className={classes.iconLogin}
+                size="medium"
+                edge="end"
+                aria-label="show map">
+                <ExploreIcon fontSize="large" />
+              </IconButton>
               <IconButton
                 onClick={toggleDialog}
                 className={classes.iconLogin}
@@ -60,7 +75,7 @@ export default function PrimarySearchAppBar() {
         onClose={toggleDialog}
         aria-labelledby="form-dialog-login">
         <DialogContent>
-          <LoginForm />
+          <Form />
         </DialogContent>
       </Dialog>
     </>

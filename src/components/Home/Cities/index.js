@@ -11,6 +11,10 @@ import { NavLink, useHistory } from "react-router-dom";
 const Cities = (props) => {
   const classes = useStyles();
   const history = useHistory();
+
+  const showCity = (name) => {
+    history.push(`/ville/${name}`);
+  };
   const cities = [
     {
       name: "Paris",
@@ -37,16 +41,18 @@ const Cities = (props) => {
       <Grid container justifyContent="space-around">
         {cities.map((city) => (
           <Grid item xs={5} md={2} key={city.name}>
-            <NavLink
+            {/* <NavLink
               to={`/ville/${city.name}`}
-              style={{ textDecoration: "none", color: "black" }}>
+              style={{ textDecoration: "none", color: "black" }}> */}
+            <div onClick={() => showCity(city.name)}>
               <img
                 className={classes.cityPicture}
                 src={city.image}
                 alt={city.name}
               />
               <Typography className={classes.cityName}>{city.name}</Typography>
-            </NavLink>
+            </div>
+            {/* </NavLink> */}
           </Grid>
         ))}
       </Grid>

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => {
     root: {
       display: "flex",
       justifyContent: "center",
-      paddingTop: theme.spacing(8),
+      paddingTop: theme.spacing(10),
     },
 
     inputMobile: {

@@ -1,37 +1,34 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
-// MUI
 import { Button, TextField, Typography } from "@material-ui/core";
-import { Facebook as FacebookIcon } from "@material-ui/icons";
-
-// SVG
-import { ReactComponent as Logo } from "../../images/googleIcon.svg";
 
 // STYLES
-import useStyles from "../../styles/LoginForm";
+import useStyles from "../../../styles/Form";
 
-const LoginForm = ({ submitLogin }) => {
+const Signup = ({ submitSignup }) => {
   const classes = useStyles();
-  const [input, setInput] = useState({ email: "", password: "" });
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const handleChange = (event, type) => {
     setInput((prevState) => ({ ...prevState, [type]: event.target.value }));
   };
-
   return (
     <>
       <header className={classes.header}>
         <section>
           <Typography variant="h5" align="center">
-            Connexion
+            Inscription
           </Typography>
         </section>
       </header>
 
-      <main className={classes.main}>
+      <div className={classes.main}>
         <section>
-          <form onSubmit={(event) => submitLogin(event, input)}>
+          <form onSubmit={(event) => submitSignup(event, input)}>
             <TextField
               fullWidth
               id="email"
@@ -49,8 +46,22 @@ const LoginForm = ({ submitLogin }) => {
               fullWidth
               id="password"
               value={input.password}
-              label="Password"
+              label="Mot de passe"
               onChange={(event) => handleChange(event, "password")}
+              variant="outlined"
+              type="password"
+              required
+              className={classes.textFieldPW}
+              InputProps={{
+                className: classes.inputProps,
+              }}
+            />
+            <TextField
+              fullWidth
+              id="confirmPassword"
+              value={input.confirmPassword}
+              label="Confirmation"
+              onChange={(event) => handleChange(event, "confirmPassword")}
               variant="outlined"
               type="password"
               required
@@ -68,37 +79,13 @@ const LoginForm = ({ submitLogin }) => {
             </Button>
           </form>
         </section>
-        <section className={classes.section}>
-          <Typography align="center" variant="subtitle2">
-            ou
-          </Typography>
-          <Button
-            endIcon={<FacebookIcon style={{ color: "#4267B2" }} />}
-            variant="outlined"
-            fullWidth
-            id="facebook"
-            className={classes.buttonFB}>
-            Continuer avec Facebook
-          </Button>
-          <Button endIcon={<Logo />} variant="outlined" id="google" fullWidth>
-            Continuer avec Google
-          </Button>
-        </section>
-      </main>
-      <footer>
-        <Typography component="p" color="textSecondary" align="center">
-          Pas encore inscrit ?
-        </Typography>
-        <Typography component="p" color="textPrimary" align="center">
-          Rejoins nous
-        </Typography>
-      </footer>
+      </div>
     </>
   );
 };
 
-LoginForm.propTypes = {
-  submitLogin: PropTypes.func.isRequired,
+Signup.propTypes = {
+  submitSigup: PropTypes.func,
 };
 
-export default LoginForm;
+export default Signup;

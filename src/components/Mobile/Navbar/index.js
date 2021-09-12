@@ -34,7 +34,7 @@ const Navbar = (props) => {
     if (isLog) {
       history.push("/u/0");
     } else {
-      history.push("/login");
+      history.push("/connexion");
     }
   };
 

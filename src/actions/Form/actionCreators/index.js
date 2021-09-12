@@ -2,9 +2,16 @@ import login from "../actionType";
 
 const loginAction = {
   // MIDDLEWARE
-  submitLogin(datas) {
+  submitSignin(datas) {
     return {
-      type: login.SUBMIT_LOGIN,
+      type: login.SUBMIT_SIGNIN,
+      datas,
+    };
+  },
+
+  submitSignup(datas) {
+    return {
+      type: login.SUBMIT_SIGNUP,
       datas,
     };
   },

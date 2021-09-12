@@ -25,7 +25,7 @@ const User = (props) => {
   const isLog = false;
 
   if (!isLog) {
-    history.replace("/login");
+    history.replace("/lconnexion");
   }
   return (
     <div style={{ margin: 60 }}>
