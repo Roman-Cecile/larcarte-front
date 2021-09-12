@@ -6,7 +6,6 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // Components
 import Home from "../Home";
-import Login from "../LogForm";
 import Restaurant from "../Restaurant";
 import User from "../User";
 import Favorite from "../Favorite";
@@ -14,6 +13,9 @@ import Favorite from "../Favorite";
 // Router dom
 import { Route, Switch } from "react-router-dom";
 import City from "../City";
+
+// Containers
+import { LoginForm } from "../../containers/LoginForm";
 
 const App = () => {
   const matches = useMediaQuery("(max-width:600px)");
@@ -26,16 +28,22 @@ const App = () => {
     navbar = <NavbarDesktop />;
   }
 
+  const isLog = false;
+
   return (
     <>
       {navbar}
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
+        {isLog ? (
+          <Route exact path="/u/:id" component={User} />
+        ) : (
+          <Route exact path="/login" component={LoginForm} />
+        )}
         <Route exact path="/restaurant/:name" component={Restaurant} />
         <Route exact path="/ville/:city" component={City} />
         <Route exact path="/u/:id/favoris" component={Favorite} />
-        <Route exact path="/u/:id" component={User} />
+        <Route>404</Route>
       </Switch>
     </>
   );

@@ -28,6 +28,26 @@ const useStyles = makeStyles({
 const Navbar = (props) => {
   const classes = useStyles();
   const history = useHistory();
+  const isLog = false;
+
+  const handleClick = (event) => {
+    if (isLog) {
+      history.push("/u/0");
+    } else {
+      history.push("/login");
+    }
+  };
+
+  let favorisButton;
+  if (isLog) {
+    favorisButton = (
+      <BottomNavigationAction
+        onClick={() => history.push("/u/0/favoris")}
+        label="Favoris"
+        icon={<FavoriteIcon />}
+      />
+    );
+  }
 
   return (
     <BottomNavigation showLabels className={classes.root}>
@@ -41,13 +61,9 @@ const Navbar = (props) => {
         label="Home"
         icon={<HomeIcon />}
       />
+      {favorisButton}
       <BottomNavigationAction
-        onClick={() => history.push("/u/0/favoris")}
-        label="Favoris"
-        icon={<FavoriteIcon />}
-      />
-      <BottomNavigationAction
-        onClick={() => history.push("/u/0")}
+        onClick={handleClick}
         label="Compte"
         icon={<PersonIcon />}
       />

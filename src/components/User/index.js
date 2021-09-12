@@ -8,6 +8,7 @@ import { data } from "browserslist";
 
 // Component
 import Restorer from "../Home/Restorer";
+import { useHistory } from "react-router-dom";
 
 const datas = {
   name: "roman",
@@ -19,6 +20,13 @@ const datas = {
 const User = (props) => {
   const classes = useStyles();
   const [isEdit, setIsEdit] = useState(false);
+  const history = useHistory();
+
+  const isLog = false;
+
+  if (!isLog) {
+    history.replace("/login");
+  }
   return (
     <div style={{ margin: 60 }}>
       <header className={classes.header}>
