@@ -1,5 +1,5 @@
 // Actions
-import login from "../../actions/LoginForm/actionType";
+import login from "../../actions/Form/actionType";
 
 export const initialState = {
   isLogin: false,

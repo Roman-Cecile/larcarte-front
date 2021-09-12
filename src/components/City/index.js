@@ -83,7 +83,12 @@ const City = (props) => {
   const history = useHistory();
   return (
     <div>
-      <header style={{ paddingBottom: 25, borderBottom: "solid 1px #d6d6d6" }}>
+      <header
+        style={{
+          paddingBottom: 25,
+          borderBottom: "solid 1px #d6d6d6",
+          marginTop: 80,
+        }}>
         <Typography
           style={{ marginTop: 16 }}
           align="center"
