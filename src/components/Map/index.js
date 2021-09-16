@@ -15,45 +15,60 @@ import { defaults as controlDefaults } from "ol/control";
 import Point from "ol/geom/Point";
 import { Icon, Style } from "ol/style";
 import localisationIcon from "../../images/localisation.png";
+import axios from "axios";
 
 export default class index extends Component {
   componentDidMount() {
+    const { coords, restaurantName, isEditable } = this.props;
+    let pointGeom;
+    let vectorSource;
+    let restaurantLayer;
+
     // Transform restaurant coords from WGS-84 to pseudo mercator
     const transformCoords = transform(
-      [this.props.coords.x, this.props.coords.y],
+      [coords.x, coords.y],
       "EPSG:4326",
       "EPSG:3857"
     );
+    if (!isEditable) {
+      // Create point
+      pointGeom = new Feature({
+        geometry: new Point(transformCoords),
+        name: restaurantName,
+      });
 
-    // Create point
-    const pointGeom = new Feature({
-      geometry: new Point(transformCoords),
-      name: this.props.restaurantName,
-    });
+      // Set point style
+      const iconStyle = new Style({
+        image: new Icon({
+          anchor: [150, 250],
+          anchorXUnits: "pixels",
+          anchorYUnits: "pixels",
+          src: localisationIcon,
+          scale: 0.2,
+        }),
+      });
 
-    // Set point style
-    const iconStyle = new Style({
-      image: new Icon({
-        anchor: [150, 250],
-        anchorXUnits: "pixels",
-        anchorYUnits: "pixels",
-        src: localisationIcon,
-        scale: 0.2,
-      }),
-    });
+      pointGeom.setStyle(iconStyle);
 
-    pointGeom.setStyle(iconStyle);
+      // Create source and add feature
+      vectorSource = new VectorSource({
+        features: [pointGeom],
+      });
 
-    // Create source and add feature
-    const vectorSource = new VectorSource({
-      features: [pointGeom],
-    });
+      // Create layer
+      restaurantLayer = new VectorLayer({
+        name: restaurantName,
+        source: vectorSource,
+      });
+    } else {
+      vectorSource = new VectorSource();
 
-    // Create layer
-    const showRestaurant = new VectorLayer({
-      name: this.props.restaurantName,
-      source: vectorSource,
-    });
+      // Create layer
+      restaurantLayer = new VectorLayer({
+        name: restaurantName,
+        source: vectorSource,
+      });
+    }
 
     // BUILD MAP
     const map = new Map({
@@ -86,29 +101,65 @@ export default class index extends Component {
           }),
           opacity: 0.7,
         }),
-        showRestaurant,
       ],
-
-      view: new View({
-        center: fromLonLat([this.props.coords.x, this.props.coords.y]),
-        zoom: 18,
-        minZoom: 17,
-        maxZoom: 20,
-      }),
     });
 
+    const view = new View({
+      center: fromLonLat([coords.x, coords.y]),
+      zoom: isEditable ? 12 : 18,
+      minZoom: isEditable ? 12 : 17,
+      maxZoom: 20,
+    });
+    map.addLayer(restaurantLayer);
+    map.setView(view);
+
     this.map = map;
+    this.transformCoords = transformCoords;
   }
   render() {
-    const { classes } = this.props;
+    const openLayerMap = this;
 
-    const openLauerMap = this;
+    const handleChange = (data) => {
+      openLayerMap.props.setChoices((prevState) => ({
+        ...prevState,
+        id: data.features[0].properties.id,
+        adresse: data.features[0].properties.name,
+      }));
+    };
+
+    if (openLayerMap.map && openLayerMap.props.isEditable) {
+      openLayerMap.map.once("singleclick", (event) => {
+        console.log("data");
+        const transformCoords = transform(
+          openLayerMap.map.getCoordinateFromPixel(event.pixel),
+          "EPSG:3857",
+          "EPSG:4326"
+        );
+
+        axios // GET API call
+          .get(
+            `https://api-adresse.data.gouv.fr/reverse/?lon=${transformCoords[0]}&lat=${transformCoords[1]}&limit=1`,
+            {
+              withCredentials: false,
+            }
+          )
+
+          .then(({ data }) => {
+            handleChange(data);
+          })
+          .catch((err) => {
+            console.trace(err);
+          });
+      });
+    }
+
     setTimeout(function () {
-      openLauerMap.map.updateSize();
+      openLayerMap.map.updateSize();
     }, 200);
+
     return (
       <>
-        <div id="map" className={classes.map}></div>
+        <div id="map" style={{ height: 400, with: "100%" }}></div>
       </>
     );
   }

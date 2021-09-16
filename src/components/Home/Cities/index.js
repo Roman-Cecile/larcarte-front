@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import useStyles from "../../../styles/Home/citiesStyle";
 import { Grid, Typography } from "@material-ui/core";
-import paris from "../../../images/paris.webp";
-import montpellier from "../../../images/montpellier.webp";
-import bordeaux from "../../../images/bordeaux.webp";
+import paris from "../../../images/parisLogo.webp";
+import montpellier from "../../../images/montpellierLogo.webp";
+import bordeaux from "../../../images/bordeauxLogo.webp";
 import marseille from "../../../images/marseille.webp";
 import { useHistory } from "react-router-dom";
 

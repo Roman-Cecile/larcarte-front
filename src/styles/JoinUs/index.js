@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => {
 
     containerTextMobileSteps: {
       ...containerTextMobile,
-      height: "75vh",
+      height: "80vh",
       width: "100%",
     },
 
