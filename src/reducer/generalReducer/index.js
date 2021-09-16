@@ -8,7 +8,6 @@ export const initialState = {
 const generalReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case generalAction.TOGGLE_LOADER: {
-      console.log("toggle");
       return {
         ...state,
         loader: !state.loader,

@@ -28,7 +28,6 @@ const App = ({ isLogin, loader }) => {
   const isMobile = useResponsive();
   const classes = useStyles();
   let navbar;
-  console.log(loader);
   // Conditional display for navbar component
   if (isMobile) {
     navbar = <NavbarMobile isLogin={isLogin} />;
