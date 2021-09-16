@@ -51,7 +51,7 @@ const Navbar = ({ isLogin }) => {
   return (
     <BottomNavigation showLabels className={classes.root}>
       <BottomNavigationAction
-        onClick={() => history.push("/map")}
+        onClick={() => history.push("/carte")}
         label="Carte"
         icon={<ExploreIcon />}
       />

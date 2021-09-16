@@ -10,7 +10,7 @@ const Init = ({ setStartQuestion }) => {
     <div className={isMobile ? classes.textMobile : classes.textDesktop}>
       <div style={{ padding: 20 }}>
         <Typography component="p" variant="h5" style={{ fontWeight: "bold" }}>
-          Rejoignez nous
+          Augmentez votre visibilité sans contrainte
         </Typography>
         <Typography component="p">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis
