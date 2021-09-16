@@ -16,7 +16,14 @@ const useStyles = makeStyles((theme) => {
       textAlign: "center",
       marginTop: theme.spacing(7),
     },
-    form: {
+
+    formDesktop: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+
+    textField: {
       margin: theme.spacing(2),
     },
 

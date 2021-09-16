@@ -7,7 +7,10 @@ import useStyles from "../../styles/User";
 
 // Component
 import Restorer from "../Home/Restorer";
+import RestaurantList from "./RestaurantList";
+
 import { useHistory } from "react-router-dom";
+import useResponsive from "../../utils/personalHooks/responsive";
 
 const datas = {
   name: "roman",
@@ -19,8 +22,17 @@ const datas = {
 const User = ({ isLogin }) => {
   window.scrollTo(0, 0);
   const classes = useStyles();
+  const isMobile = useResponsive();
   const [isEdit, setIsEdit] = useState(false);
   const history = useHistory();
+  let componentRestaurant;
+  const hasRestaurant = true;
+
+  if (hasRestaurant) {
+    componentRestaurant = <RestaurantList />;
+  } else {
+    componentRestaurant = <Restorer />;
+  }
 
   if (!isLogin) {
     history.replace("/connexion");
@@ -35,6 +47,7 @@ const User = ({ isLogin }) => {
           <Typography
             onClick={() => setIsEdit(!isEdit)}
             component="p"
+            style={{ cursor: "pointer" }}
             variant="subtitle2"
             color="textSecondary">
             Modifier mon compte
@@ -60,15 +73,15 @@ const User = ({ isLogin }) => {
 
       <main className={classes.main}>
         <section>
-          <form>
+          <form className={isMobile ? "" : classes.formDesktop}>
             <TextField
-              className={classes.form}
+              className={classes.textField}
               variant="outlined"
               value={datas.name}
               disabled={!isEdit}
             />
             <TextField
-              className={classes.form}
+              className={classes.textField}
               variant="outlined"
               value={datas.password}
               disabled={!isEdit}
@@ -84,9 +97,7 @@ const User = ({ isLogin }) => {
             </Button>
           </form>
         </section>
-        <section>
-          <Restorer />
-        </section>
+        <section>{componentRestaurant}</section>
       </main>
     </div>
   );

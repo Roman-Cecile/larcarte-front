@@ -129,7 +129,6 @@ export default class index extends Component {
 
     if (openLayerMap.map && openLayerMap.props.isEditable) {
       openLayerMap.map.once("singleclick", (event) => {
-        console.log("data");
         const transformCoords = transform(
           openLayerMap.map.getCoordinateFromPixel(event.pixel),
           "EPSG:3857",
