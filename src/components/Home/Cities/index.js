@@ -6,7 +6,7 @@ import paris from "../../../images/paris.webp";
 import montpellier from "../../../images/montpellier.webp";
 import bordeaux from "../../../images/bordeaux.webp";
 import marseille from "../../../images/marseille.webp";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Cities = (props) => {
   const classes = useStyles();
@@ -41,9 +41,6 @@ const Cities = (props) => {
       <Grid container justifyContent="space-around">
         {cities.map((city) => (
           <Grid item xs={5} md={2} key={city.name}>
-            {/* <NavLink
-              to={`/ville/${city.name}`}
-              style={{ textDecoration: "none", color: "black" }}> */}
             <div onClick={() => showCity(city.name)}>
               <img
                 className={classes.cityPicture}
@@ -52,7 +49,6 @@ const Cities = (props) => {
               />
               <Typography className={classes.cityName}>{city.name}</Typography>
             </div>
-            {/* </NavLink> */}
           </Grid>
         ))}
       </Grid>

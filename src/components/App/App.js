@@ -1,14 +1,13 @@
+import React from "react";
+
 import NavbarMobile from "../Mobile/Navbar";
 import NavbarDesktop from "../Desktop/Navbar";
-
-// MUI MEDIA QUERIES
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 // Components
 import Home from "../Home";
 import Restaurant from "../Restaurant";
-import User from "../User";
 import Favorite from "../Favorite";
+import JoinUs from "../JoinUs";
 
 // Router dom
 import { Route, Switch } from "react-router-dom";
@@ -16,19 +15,19 @@ import City from "../City";
 
 // Containers
 import { Form } from "../../containers/Form";
+import { User } from "../../containers/User";
+import useResponsive from "../../utils/personalHooks/responsive";
 
-const App = () => {
-  const matches = useMediaQuery("(max-width:600px)");
+const App = ({ isLogin }) => {
+  const isMobile = useResponsive();
   let navbar;
 
   // Conditional display for navbar component
-  if (matches) {
-    navbar = <NavbarMobile />;
+  if (isMobile) {
+    navbar = <NavbarMobile isLogin={isLogin} />;
   } else {
-    navbar = <NavbarDesktop />;
+    navbar = <NavbarDesktop isLogin={isLogin} />;
   }
-
-  const isLog = false;
 
   return (
     <>
@@ -37,7 +36,8 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/restaurant/:name" component={Restaurant} />
         <Route exact path="/ville/:city" component={City} />
-        {isLog ? (
+        <Route exact path="/rejoindre-la-carte" component={JoinUs} />
+        {isLogin ? (
           <Route path="/u">
             <Switch>
               <Route exact path="/u/:id" component={User} />

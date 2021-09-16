@@ -4,7 +4,6 @@ import { Avatar, Button, TextField, Typography } from "@material-ui/core";
 
 // STYLES
 import useStyles from "../../styles/User";
-import { data } from "browserslist";
 
 // Component
 import Restorer from "../Home/Restorer";
@@ -17,18 +16,17 @@ const datas = {
   inscription: 2021,
   email: "roman@hotmail.com",
 };
-const User = (props) => {
+const User = ({ isLogin }) => {
+  window.scrollTo(0, 0);
   const classes = useStyles();
   const [isEdit, setIsEdit] = useState(false);
   const history = useHistory();
 
-  const isLog = false;
-
-  if (!isLog) {
-    history.replace("/lconnexion");
+  if (!isLogin) {
+    history.replace("/connexion");
   }
   return (
-    <div style={{ margin: 60 }}>
+    <div style={{ margin: "80px 60px 60px 60px" }}>
       <header className={classes.header}>
         <div>
           <Typography component="p" variant="h5">

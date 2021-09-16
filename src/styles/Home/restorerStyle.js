@@ -54,6 +54,14 @@ const useStyles = makeStyles((theme) => {
     image: {
       backgroundSize: "cover",
     },
+
+    button: {
+      background: "-webkit-linear-gradient(40deg,#ffd86f,#fc6262)",
+      marginTop: 12,
+      color: "#fff",
+      fontWeight: "bold",
+      borderRadius: 7,
+    },
   };
 });
 

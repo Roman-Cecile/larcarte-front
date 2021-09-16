@@ -5,9 +5,8 @@ import { Typography } from "@material-ui/core";
 // Carousel
 import ImageGallery from "react-image-gallery";
 
-// MUI MEDIA QUERIES
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useHistory } from "react-router-dom";
+import useResponsive from "../../utils/personalHooks/responsive";
 
 const data = [
   {
@@ -70,7 +69,8 @@ const data = [
 ];
 
 const City = (props) => {
-  const mobile = useMediaQuery("(max-width:600px)");
+  window.scrollTo(0, 0);
+  const isMobile = useResponsive();
   // Overide carousel style
   const getElement = document.getElementsByClassName("image-gallery-slides");
   Object.keys(getElement).map(
@@ -105,14 +105,17 @@ const City = (props) => {
 
       <main style={{ margin: 30 }}>
         <div
-          style={{ display: "flex", flexDirection: mobile ? "column" : "row" }}>
+          style={{
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+          }}>
           {data.map((restaurant) => (
             <div
               onClick={() => history.push(`/restaurant/${restaurant.name}`)}
               key={restaurant.name}
               style={{
-                margin: mobile ? "16px 8px" : 16,
-                maxWidth: mobile ? null : 300,
+                margin: isMobile ? "16px 8px" : 16,
+                maxWidth: isMobile ? null : 300,
                 paddingBottom: 8,
                 borderRadius: 10,
               }}>

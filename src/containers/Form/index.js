@@ -6,7 +6,9 @@ import FormComponent from "../../components/Form";
 // ACTIONS
 import action from "../../actions/Form/actionCreators";
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  isLogin: state.userReducer.isLogin,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   submitSignin: (event, datas) => {

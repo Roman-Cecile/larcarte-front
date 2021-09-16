@@ -2,7 +2,7 @@
 import login from "../../actions/Form/actionType";
 
 export const initialState = {
-  isLogin: false,
+  isLogin: true,
   user: {},
 };
 

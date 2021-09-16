@@ -19,14 +19,18 @@ import { useHistory } from "react-router-dom";
 // COMPONENTS
 import { Form } from "../../../containers/Form";
 
-export default function PrimarySearchAppBar() {
+const Navbar = ({ isLogin }) => {
   const classes = useStyles();
   const history = useHistory();
   // Toggle dialog
   const [open, setOpen] = React.useState(false);
 
   const toggleDialog = () => {
-    setOpen(!open);
+    if (isLogin) {
+      history.push("/u/0");
+    } else {
+      setOpen(!open);
+    }
   };
 
   return (
@@ -80,4 +84,6 @@ export default function PrimarySearchAppBar() {
       </Dialog>
     </>
   );
-}
+};
+
+export default Navbar;

@@ -41,6 +41,7 @@ const data = {
   },
 };
 const Restaurant = (props) => {
+  window.scrollTo(0, 0);
   const classes = useStyles();
   const history = useHistory();
   const mobile = useMediaQuery("(max-width:600px)");

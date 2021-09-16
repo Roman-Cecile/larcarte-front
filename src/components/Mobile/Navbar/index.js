@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 // MUI
@@ -12,7 +12,7 @@ import {
 
 // MUI STYLES
 import { makeStyles } from "@material-ui/core/styles";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -25,13 +25,12 @@ const useStyles = makeStyles({
   },
 });
 
-const Navbar = (props) => {
+const Navbar = ({ isLogin }) => {
   const classes = useStyles();
   const history = useHistory();
-  const isLog = false;
 
   const handleClick = (event) => {
-    if (isLog) {
+    if (isLogin) {
       history.push("/u/0");
     } else {
       history.push("/connexion");
@@ -39,7 +38,7 @@ const Navbar = (props) => {
   };
 
   let favorisButton;
-  if (isLog) {
+  if (isLogin) {
     favorisButton = (
       <BottomNavigationAction
         onClick={() => history.push("/u/0/favoris")}

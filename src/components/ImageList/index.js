@@ -6,8 +6,9 @@ import ImageGallery from "react-image-gallery";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
-// MUI MEDIA QUERIES
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+// HOOKS
+import useResponsive from "../../utils/personalHooks/responsive";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,16 +59,11 @@ const images = [
 
 const Carousel = (props) => {
   const classes = useStyles();
-  const mobile = useMediaQuery("(max-width:600px)");
-
-  // const getElement = document.getElementsByClassName("image-gallery-slides");
-  // Object.keys(getElement).map(
-  //   (element) => (getElement[element].style["border-radius"] = "10px")
-  // );
+  const isMobile = useResponsive();
 
   let carousel;
 
-  if (mobile) {
+  if (isMobile) {
     carousel = (
       <ImageGallery
         showNav={false}
@@ -97,7 +93,8 @@ const Carousel = (props) => {
   }
 
   return (
-    <div style={{ textAlign: "-webkit-center", paddingTop: mobile ? 0 : 100 }}>
+    <div
+      style={{ textAlign: "-webkit-center", paddingTop: isMobile ? 0 : 100 }}>
       {carousel}
     </div>
   );
