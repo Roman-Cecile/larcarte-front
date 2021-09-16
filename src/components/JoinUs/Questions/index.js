@@ -108,19 +108,39 @@ const Questions = ({ create }) => {
     adresse: "",
     vegan: null,
     coords: { x: null, y: null },
-    file: {
+    menu: {
+      name: "",
+      data: {},
+    },
+    picture: {
       name: "",
       data: {},
     },
   });
 
+  // Summary of restaurant datas
+  const summary = Object.keys(choices).map(
+    (data) =>
+      data !== "coords" &&
+      data !== "menu" &&
+      data !== "picture" &&
+      data !== "id" &&
+      data !== "vegan" && (
+        <Typography key={data} variant="h6">
+          {capitalizeFirstLetter(data)}: {choices[data]}
+        </Typography>
+      )
+  );
+
+  // Check is arrow next is disabled or not
   const isDisabled =
     (selected === 0 && choices.nom === "") ||
     (selected === 1 && choices.ville === "") ||
     (selected === 2 && choices.adresse === "") ||
     (selected === 3 && choices.categorie === "") ||
     (selected === 4 && choices.vegan === null) ||
-    (selected === 5 && choices.file.name === "") ||
+    (selected === 5 && choices.picture.name === "") ||
+    (selected === 5 && choices.menu.name === "") ||
     selected === 6;
 
   return (
@@ -275,7 +295,7 @@ const Questions = ({ create }) => {
                   <Typography>
                     {" "}
                     <Add />
-                    Ajouter
+                    Ajouter un menu
                   </Typography>
                 </Tooltip>
               </InputLabel>
@@ -284,7 +304,7 @@ const Questions = ({ create }) => {
                 onChange={(event) =>
                   setChoices((prevState) => ({
                     ...prevState,
-                    file: {
+                    menu: {
                       name: event.target.files[0].name,
                       data: event.target.files[0],
                     },
@@ -297,14 +317,55 @@ const Questions = ({ create }) => {
               />
             </form>
             <div style={{ marginTop: 20 }}>
-              {choices.file.name !== "" && (
-                <CheckCircleOutline
-                  style={{ fontSize: "10rem", color: "green" }}
-                />
+              {choices.menu.name !== "" && (
+                <CheckCircleOutline className={classes.circleProgress} />
               )}
               <Typography>
-                {choices.file.name !== ""
-                  ? `${choices.file.name.substring(0, 10)}... a été importé`
+                {choices.menu.name !== ""
+                  ? `${choices.menu.name.substring(0, 10)}... a été importé`
+                  : "Aucun fichier importé"}{" "}
+              </Typography>
+            </div>
+          </section>
+          <section className={classes.section}>
+            {/* ....................UPLOAD PICTURE......................; */}
+            <Typography className={classes.question}>
+              Importer une photo de votre restaurant
+            </Typography>
+            <form>
+              <InputLabel htmlFor="addPicture">
+                <Tooltip>
+                  <Typography>
+                    {" "}
+                    <Add />
+                    Ajouter une photo
+                  </Typography>
+                </Tooltip>
+              </InputLabel>
+
+              <input
+                onChange={(event) =>
+                  setChoices((prevState) => ({
+                    ...prevState,
+                    picture: {
+                      name: event.target.files[0].name,
+                      data: event.target.files[0],
+                    },
+                  }))
+                }
+                accept="image/*"
+                id="addPicture"
+                type="file"
+                hidden
+              />
+            </form>
+            <div style={{ marginTop: 20 }}>
+              {choices.picture.name !== "" && (
+                <CheckCircleOutline className={classes.circleProgress} />
+              )}
+              <Typography>
+                {choices.picture.name !== ""
+                  ? `${choices.picture.name.substring(0, 10)}... a été importé`
                   : "Aucun fichier importé"}{" "}
               </Typography>
             </div>
@@ -315,19 +376,7 @@ const Questions = ({ create }) => {
           <header className={classes.header}>
             <Typography className={classes.question}>Récapitulatif</Typography>
           </header>
-          <section className={classes.section}>
-            {Object.keys(choices).map(
-              (data) =>
-                data !== "coords" &&
-                data !== "file" &&
-                data !== "id" &&
-                data !== "vegan" && (
-                  <Typography key={data} variant="h6">
-                    {capitalizeFirstLetter(data)}: {choices[data]}
-                  </Typography>
-                )
-            )}
-          </section>
+          <section className={classes.section}>{summary}</section>
           <section className={classes.section}>
             <Button
               onClick={() => create(choices)}
