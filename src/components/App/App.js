@@ -8,6 +8,7 @@ import Home from "../Home";
 import Restaurant from "../Restaurant";
 import Favorite from "../Favorite";
 import JoinUs from "../JoinUs";
+import Map from "../Map";
 
 // Router dom
 import { Route, Switch } from "react-router-dom";
@@ -43,6 +44,9 @@ const App = ({ isLogin, loader }) => {
         <Route exact path="/restaurant/:name" component={Restaurant} />
         <Route exact path="/ville/:city" component={City} />
         <Route exact path="/rejoindre-la-carte" component={JoinUs} />
+        <Route exact path="/carte">
+          <Map fromMenu={true} coords={{ x: 0.0, y: 0.0 }} />
+        </Route>
         {isLogin ? (
           <Route path="/u">
             <Switch>

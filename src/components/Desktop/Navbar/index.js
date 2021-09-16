@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 // STYLES
 import useStyles from "../../../styles/Desktop/Navbar";
@@ -53,7 +53,7 @@ const Navbar = ({ isLogin }) => {
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton
-                onClick={() => history.push("/map")}
+                onClick={() => history.push("/carte")}
                 className={classes.iconLogin}
                 size="medium"
                 edge="end"

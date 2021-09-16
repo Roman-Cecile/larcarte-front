@@ -47,7 +47,7 @@ const JoinUs = (props) => {
                   variant={isMobile ? "h4" : "h3"}
                   component="p"
                   style={{ fontWeight: "bold", alignItems: "center" }}>
-                  Améliorer votre visibilité
+                  Rejoignez nous
                 </Typography>
               </section>
             </Grid>

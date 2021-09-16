@@ -14,7 +14,6 @@ import {
   ListItemAvatar,
   ListItemText,
   TextField,
-  Tooltip,
   Typography,
 } from "@material-ui/core";
 
@@ -96,7 +95,7 @@ const vegan = [
     value: false,
   },
 ];
-const Questions = ({ create }) => {
+const Questions = ({ create, loader, toggleLoader }) => {
   const classes = useStyles();
   const isMobile = useResponsive();
   const [selected, setselected] = useState(0);
@@ -162,6 +161,8 @@ const Questions = ({ create }) => {
           </header>
           <section className={classes.section}>
             <TextField
+              placeholder="Nom de votre enseigne"
+              variant="outlined"
               value={choices.nom}
               onChange={(event) => {
                 setChoices((prevState) => ({
@@ -207,7 +208,7 @@ const Questions = ({ create }) => {
         <div>
           <header className={classes.header}>
             <Typography className={classes.question}>
-              Cliquez sur le lieux de votre restaurant
+              Zoomez et cliquez sur le lieux de votre restaurant
             </Typography>
             <Typography component="span">{choices.adresse}</Typography>
           </header>
@@ -219,6 +220,8 @@ const Questions = ({ create }) => {
                 address={choices.adresse}
                 setChoices={setChoices}
                 isEditable={true}
+                loader={loader}
+                toggleLoader={toggleLoader}
               />
             )}
           </section>
@@ -291,13 +294,11 @@ const Questions = ({ create }) => {
           <section className={classes.section}>
             <form>
               <InputLabel htmlFor="addMenu">
-                <Tooltip>
-                  <Typography>
-                    {" "}
-                    <Add />
-                    Ajouter un menu
-                  </Typography>
-                </Tooltip>
+                <Typography>
+                  {" "}
+                  <Add />
+                  Ajouter un menu
+                </Typography>
               </InputLabel>
 
               <input
@@ -334,13 +335,11 @@ const Questions = ({ create }) => {
             </Typography>
             <form>
               <InputLabel htmlFor="addPicture">
-                <Tooltip>
-                  <Typography>
-                    {" "}
-                    <Add />
-                    Ajouter une photo
-                  </Typography>
-                </Tooltip>
+                <Typography>
+                  {" "}
+                  <Add />
+                  Ajouter une photo
+                </Typography>
               </InputLabel>
 
               <input
@@ -393,12 +392,12 @@ const Questions = ({ create }) => {
         className={classes.buttonPrev}
         onClick={() => {
           if (selected === 2) {
-            setselected(selected - 1);
             setChoices((prevState) => ({
               ...prevState,
-              city: "",
+              ville: "",
               coords: { x: null, y: null },
             }));
+            setselected(selected - 1);
           } else if (selected > 0) {
             setselected(selected - 1);
           }
@@ -417,6 +416,8 @@ const Questions = ({ create }) => {
 
 Questions.propTypes = {
   create: PropTypes.func.isRequired,
+  loader: PropTypes.bool.isRequired,
+  toggleLoader: PropTypes.func.isRequired,
 };
 
 export default Questions;
