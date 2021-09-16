@@ -59,6 +59,11 @@ const useStyles = makeStyles((theme) => {
         "-webkit-linear-gradient(90deg, rgb(111 1 156 / 45%) 0%, rgb(198 1 126 / 31%) 135.12%)",
       color: "#fff",
     },
+
+    circleProgress: {
+      fontSize: "3rem",
+      color: "green",
+    },
   };
 });
 
