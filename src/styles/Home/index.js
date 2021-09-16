@@ -1,9 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => {
-  const matches = useMediaQuery("(max-width:600px)");
-
   return {
     containerForm: {
       backgroundImage: "url(./landing.webp)",
@@ -32,8 +29,8 @@ const useStyles = makeStyles((theme) => {
     },
 
     mainContainer: {
-      marginLeft: matches ? theme.spacing(50) : theme.spacing(2),
-      marginRight: matches ? theme.spacing(50) : theme.spacing(2),
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
       marginBottom: theme.spacing(10),
     },
 

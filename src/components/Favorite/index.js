@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import { Divider, Grid, Typography } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 
-// MUI MEDIA QUERIES
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { capitalizeFirstLetter } from "../../utils/genericFunctions";
+import useResponsive from "../../utils/personalHooks/responsive";
 
 const datas = [
   {
@@ -23,17 +22,17 @@ const datas = [
 ];
 
 const Favorite = (props) => {
-  const mobile = useMediaQuery("(max-width:600px)");
-  const tablet = useMediaQuery("(max-width:1025px)");
+  window.scrollTo(0, 0);
+  const isMobile = useResponsive();
   return (
-    <div style={{ margin: mobile ? 30 : "100px 60px" }}>
+    <div style={{ margin: isMobile ? 30 : "100px 60px" }}>
       <header>
         <Typography component="p" variant="h4">
           Favoris
         </Typography>
       </header>
       <Divider />
-      <main style={{ marginTop: 30, display: mobile ? "" : "flex" }}>
+      <main style={{ marginTop: 30, display: isMobile ? "" : "flex" }}>
         {datas.map((restaurant) => (
           <NavLink
             to={`/restaurant/${restaurant.name}`}
@@ -48,8 +47,8 @@ const Favorite = (props) => {
                   src={restaurant.picture}
                   alt="restaurant façade"
                   style={{
-                    height: mobile ? 55 : 200,
-                    width: mobile ? 60 : 200,
+                    height: isMobile ? 55 : 200,
+                    width: isMobile ? 60 : 200,
                     borderRadius: 5,
                   }}
                 />

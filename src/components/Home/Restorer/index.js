@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -12,10 +12,13 @@ import {
 import useStyles from "../../../styles/Home/restorerStyle";
 
 import restorer from "../../../images/restorer.webp";
+import { useHistory } from "react-router-dom";
+import useResponsive from "../../../utils/personalHooks/responsive";
 
 const Restorer = (props) => {
-  const matches = useMediaQuery("(max-width:600px)");
+  const isMobile = useResponsive();
   const classes = useStyles();
+  const history = useHistory();
 
   let card;
   const cardText = {
@@ -23,7 +26,11 @@ const Restorer = (props) => {
     text: "Facilitez-vous la vie en nous laissant gérer vos cartes pour les mettre en valeur",
   };
 
-  if (matches) {
+  const handleClick = () => {
+    history.push("/rejoindre-la-carte");
+  };
+
+  if (isMobile) {
     card = (
       <>
         <CardHeader
@@ -37,6 +44,9 @@ const Restorer = (props) => {
         />
         <CardContent>
           <Typography component="p">{cardText.text}</Typography>
+          <Button variant="outlined" className={classes.button}>
+            Rejoindre
+          </Button>
         </CardContent>
       </>
     );
@@ -49,6 +59,7 @@ const Restorer = (props) => {
               {cardText.title}
             </Typography>
             <Typography component="p">{cardText.text}</Typography>
+            <Button variant="outlined">Rejoindre</Button>
           </CardContent>
         </div>
       </>
@@ -57,7 +68,9 @@ const Restorer = (props) => {
   return (
     <>
       <div>
-        <Card className={matches ? classes.card : classes.cardMobile}>
+        <Card
+          onClick={handleClick}
+          className={isMobile ? classes.card : classes.cardMobile}>
           {card}
         </Card>
       </div>

@@ -5,12 +5,12 @@ import { ClickAwayListener, TextField } from "@material-ui/core";
 import useStyles from "../../../styles/Mobile/searchbar";
 import { Search as SearchIcon } from "@material-ui/icons";
 
-// MUI MEDIA QUERIES
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+// HOOKS
+import useResponsive from "../../../utils/personalHooks/responsive";
 
 const Searchbar = () => {
   const classes = useStyles();
-  const matches = useMediaQuery("(max-width:600px)");
+  const isMobile = useResponsive();
   const [toggleSearchbar, setToggleSearchbar] = useState(false);
 
   let searchbar;
@@ -20,7 +20,7 @@ const Searchbar = () => {
         <TextField
           placeholder="Rechercher"
           InputProps={{
-            className: matches ? classes.inputMobile : classes.inputDesktop,
+            className: isMobile ? classes.inputMobile : classes.inputDesktop,
             disableUnderline: true,
           }}
           autoFocus
@@ -31,7 +31,7 @@ const Searchbar = () => {
     searchbar = (
       <div
         className={
-          matches ? classes.fakeInputMobile : classes.fakeInputDesktop
+          isMobile ? classes.fakeInputMobile : classes.fakeInputDesktop
         }>
         <SearchIcon color="error" /> Quel restaurant ?
       </div>
