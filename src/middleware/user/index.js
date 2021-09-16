@@ -4,13 +4,13 @@ import axios from "axios";
 import { url } from "../../utils/constants";
 
 // Actions Types
-import login from "../../actions/Form/actionType";
+import loginAction from "../../actions/Form/actionType";
 
 axios.defaults.withCredentials = true;
 const user = (store) => (next) => (action) => {
   console.info("MIDDLEWARE USER >", action.type);
   switch (action.type) {
-    case login.SUBMIT_SIGNIN: {
+    case loginAction.SUBMIT_SIGNIN: {
       axios({
         method: "POST",
         url: `${url}/login`,
@@ -24,7 +24,7 @@ const user = (store) => (next) => (action) => {
       break;
     }
 
-    case login.SUBMIT_SIGNUP: {
+    case loginAction.SUBMIT_SIGNUP: {
       axios({
         method: "POST",
         url: `${url}/login`,
