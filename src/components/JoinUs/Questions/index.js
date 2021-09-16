@@ -8,19 +8,41 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {
   Avatar,
   Button,
+  InputLabel,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
+  TextField,
+  Tooltip,
   Typography,
 } from "@material-ui/core";
 
-import paris from "../../../images/paris.jpg";
+// COMPONENTS
+import Map from "../../Map";
+
+// Cities
+import paris from "../../../images/paris.webp";
+import bordeaux from "../../../images/bordeaux.webp";
+import montpellier from "../../../images/montpellier.webp";
+import lyon from "../../../images/lyon.webp";
+
+// restaurants
 import bistrot from "../../../images/bistrot.jpg";
 import italy from "../../../images/Italy.jpeg";
 import macdo from "../../../images/macdo.jpg";
-import { NavigateBefore, NavigateNext } from "@material-ui/icons";
+
+// MUI
+import {
+  Add,
+  CheckCircleOutline,
+  NavigateBefore,
+  NavigateNext,
+} from "@material-ui/icons";
+
+//HOOKS
 import useResponsive from "../../../utils/personalHooks/responsive";
+import { capitalizeFirstLetter } from "../../../utils/genericFunctions";
 
 const restaurantType = [
   {
@@ -45,18 +67,22 @@ const city = [
   {
     img: paris,
     name: "Paris",
+    coords: { x: 2.333333, y: 48.866667 },
   },
   {
-    img: bistrot,
+    img: montpellier,
     name: "Montpellier",
+    coords: { x: 3.876716, y: 43.610769 },
   },
   {
-    img: italy,
+    img: lyon,
     name: "Lyon",
+    coords: { x: 4.85, y: 45.75 },
   },
   {
-    img: macdo,
+    img: bordeaux,
     name: "Bordeaux",
+    coords: { x: -0.57918, y: 44.837789 },
   },
 ];
 
@@ -74,12 +100,30 @@ const Questions = (props) => {
   const classes = useStyles();
   const isMobile = useResponsive();
   const [selected, setselected] = useState(0);
-
   const [choices, setChoices] = useState({
-    city: "",
-    restaurantType: "",
+    id: null,
+    nom: "",
+    ville: "",
+    categorie: "",
+    adresse: "",
     vegan: null,
+    coords: { x: null, y: null },
+    file: {
+      name: "",
+      data: {},
+    },
   });
+
+  console.log(choices.file);
+
+  const isDisabled =
+    (selected === 0 && choices.nom === "") ||
+    (selected === 1 && choices.ville === "") ||
+    (selected === 2 && choices.adresse === "") ||
+    (selected === 3 && choices.categorie === "") ||
+    (selected === 4 && choices.vegan === null) ||
+    (selected === 5 && choices.file.name === "") ||
+    selected === 6;
 
   return (
     <div
@@ -92,7 +136,76 @@ const Questions = (props) => {
         showIndicators={false}
         showArrows={false}
         showStatus={false}>
-        {/*..........Restaurant type..........*/}
+        <div>
+          <header className={classes.header}>
+            <Typography className={classes.question}>
+              Quel est le nom de votre restaurant ?
+            </Typography>
+          </header>
+          <section className={classes.section}>
+            <TextField
+              value={choices.nom}
+              onChange={(event) => {
+                setChoices((prevState) => ({
+                  ...prevState,
+                  nom: event.target.value,
+                }));
+              }}
+            />
+          </section>
+        </div>
+        {/*....................CITIES....................*/}
+        <div>
+          <header className={classes.header}>
+            <Typography className={classes.question}>
+              Dans quelle ville est votre restaurant ?
+            </Typography>
+          </header>
+          <section className={classes.section}>
+            <List component="ul" aria-label="secondary mailbox folders">
+              {city.map(({ img, name, coords }) => (
+                <ListItem
+                  key={name}
+                  onClick={() => {
+                    setChoices((prevState) => ({
+                      ...prevState,
+                      ville: name,
+                      coords,
+                    }));
+                  }}
+                  className={`${classes.listItem} ${
+                    choices.ville === name && classes.selected
+                  }`}>
+                  <ListItemAvatar>
+                    <Avatar src={img} />
+                  </ListItemAvatar>
+                  <ListItemText primary={name} />
+                </ListItem>
+              ))}
+            </List>
+          </section>
+        </div>
+        {/*....................ADDRESS MAP....................*/}
+        <div>
+          <header className={classes.header}>
+            <Typography className={classes.question}>
+              Cliquez sur le lieux de votre restaurant
+            </Typography>
+            <Typography component="span">{choices.adresse}</Typography>
+          </header>
+          <section className={classes.section}>
+            {choices.ville !== "" && (
+              <Map
+                coords={choices.coords}
+                restaurantName={choices.nom}
+                address={choices.adresse}
+                setChoices={setChoices}
+                isEditable={true}
+              />
+            )}
+          </section>
+        </div>
+        {/*....................Restaurant type....................*/}
         <div>
           <header className={classes.header}>
             <Typography className={classes.question}>
@@ -107,12 +220,11 @@ const Questions = (props) => {
                   onClick={() => {
                     setChoices((prevState) => ({
                       ...prevState,
-                      restaurantType: restaurant.type,
+                      categorie: restaurant.type,
                     }));
                   }}
                   className={`${classes.listItem} ${
-                    choices.restaurantType === restaurant.type &&
-                    classes.selected
+                    choices.categorie === restaurant.type && classes.selected
                   }`}>
                   <ListItemAvatar>
                     <Avatar src={restaurant.img} />
@@ -123,41 +235,12 @@ const Questions = (props) => {
             </List>
           </section>
         </div>
-        {/*..........Ville..........*/}
+
+        {/* ....................Vegetarien friendly......................; */}
         <div>
           <header className={classes.header}>
             <Typography className={classes.question}>
-              Dans quelle ville est votre restaurant ?
-            </Typography>
-          </header>
-          <section className={classes.section}>
-            <List component="ul" aria-label="secondary mailbox folders">
-              {city.map(({ img, name }) => (
-                <ListItem
-                  key={name}
-                  onClick={() => {
-                    setChoices((prevState) => ({
-                      ...prevState,
-                      city: name,
-                    }));
-                  }}
-                  className={`${classes.listItem} ${
-                    choices.city === name && classes.selected
-                  }`}>
-                  <ListItemAvatar>
-                    <Avatar src={img} />
-                  </ListItemAvatar>
-                  <ListItemText primary={name} />
-                </ListItem>
-              ))}
-            </List>
-          </section>
-        </div>
-        {/* .............Vegetarien friendly...............; */}
-        <div>
-          <header className={classes.header}>
-            <Typography className={classes.question}>
-              Votre restaurant ...
+              Votre restaurant...
             </Typography>
           </header>
           <section className={classes.section}>
@@ -165,12 +248,12 @@ const Questions = (props) => {
               {vegan.map(({ text, value }) => (
                 <ListItem
                   key={text}
-                  onClick={() => {
+                  onClick={() =>
                     setChoices((prevState) => ({
                       ...prevState,
                       vegan: value,
-                    }));
-                  }}
+                    }))
+                  }
                   className={`${classes.listItem} ${
                     choices.vegan === value && classes.selected
                   }`}>
@@ -180,19 +263,101 @@ const Questions = (props) => {
             </List>
           </section>
         </div>
+        {/* ....................UPLOAD MENU......................; */}
+        <div>
+          <header className={classes.header}>
+            <Typography className={classes.question}>
+              Importer votre menu au format PDF
+            </Typography>
+          </header>
+          <section className={classes.section}>
+            <form>
+              <InputLabel htmlFor="addMenu">
+                <Tooltip>
+                  <Typography>
+                    {" "}
+                    <Add />
+                    Ajouter
+                  </Typography>
+                </Tooltip>
+              </InputLabel>
+
+              <input
+                onChange={(event) =>
+                  setChoices((prevState) => ({
+                    ...prevState,
+                    file: {
+                      name: event.target.files[0].name,
+                      data: event.target.files[0],
+                    },
+                  }))
+                }
+                accept="application/pdf"
+                id="addMenu"
+                type="file"
+                hidden
+              />
+            </form>
+            <div style={{ marginTop: 20 }}>
+              {choices.file.name !== "" && (
+                <CheckCircleOutline
+                  style={{ fontSize: "10rem", color: "green" }}
+                />
+              )}
+              <Typography>
+                {choices.file.name !== ""
+                  ? `${choices.file.name.substring(0, 10)}... a été importé`
+                  : "Aucun fichier importé"}{" "}
+              </Typography>
+            </div>
+          </section>
+        </div>
+        {/* ....................SUMMARY......................; */}
+        <div>
+          <header className={classes.header}>
+            <Typography className={classes.question}>Récapitulatif</Typography>
+          </header>
+          <section className={classes.section}>
+            {Object.keys(choices).map(
+              (data) =>
+                data !== "coords" &&
+                data !== "file" &&
+                data !== "id" &&
+                data !== "vegan" && (
+                  <Typography variant="h6">
+                    {capitalizeFirstLetter(data)}: {choices[data]}
+                  </Typography>
+                )
+            )}
+          </section>
+          <section className={classes.section}>
+            <Button className={classes.saveButton}>Valider</Button>
+          </section>
+        </div>
       </Carousel>
 
       {/* .......... BUTTONS .......... */}
       <Button
         disabled={selected === 0}
         className={classes.buttonPrev}
-        onClick={() => selected > 0 && setselected(selected - 1)}>
+        onClick={() => {
+          if (selected === 2) {
+            setselected(selected - 1);
+            setChoices((prevState) => ({
+              ...prevState,
+              city: "",
+              coords: { x: null, y: null },
+            }));
+          } else if (selected > 0) {
+            setselected(selected - 1);
+          }
+        }}>
         <NavigateBefore fontSize="large" />
       </Button>
       <Button
-        disabled={selected > 1}
+        disabled={isDisabled}
         className={classes.buttonNext}
-        onClick={() => selected < 2 && setselected(selected + 1)}>
+        onClick={() => selected < 7 && setselected(selected + 1)}>
         <NavigateNext fontSize="large" />
       </Button>
     </div>

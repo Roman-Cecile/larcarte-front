@@ -165,7 +165,7 @@ const Restaurant = (props) => {
           <Map
             coords={data.coords}
             restaurantName={data.name}
-            classes={classes}
+            isEditable={false}
           />
         </section>
       </main>
