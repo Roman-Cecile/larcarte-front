@@ -8,6 +8,7 @@ import AppComponent from "../../components/App/App";
 
 const mapStateToProps = (state) => ({
   isLogin: state.userReducer.isLogin,
+  loader: state.generalReducer.loader,
 });
 
 const mapDispatchToProps = (dispatch) => ({});

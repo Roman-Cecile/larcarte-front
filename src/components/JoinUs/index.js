@@ -7,7 +7,10 @@ import { Grid, Typography } from "@material-ui/core";
 import useStyles from "../../styles/JoinUs";
 // HOOKS
 import useResponsive from "../../utils/personalHooks/responsive";
-import Questions from "./Questions";
+
+// Container
+import { Questions } from "../../containers/Questions";
+
 // import { useHistory } from "react-router-dom";
 import Init from "./Init";
 

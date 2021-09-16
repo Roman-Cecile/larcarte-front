@@ -96,7 +96,7 @@ const vegan = [
     value: false,
   },
 ];
-const Questions = (props) => {
+const Questions = ({ create }) => {
   const classes = useStyles();
   const isMobile = useResponsive();
   const [selected, setselected] = useState(0);
@@ -113,8 +113,6 @@ const Questions = (props) => {
       data: {},
     },
   });
-
-  console.log(choices.file);
 
   const isDisabled =
     (selected === 0 && choices.nom === "") ||
@@ -324,14 +322,18 @@ const Questions = (props) => {
                 data !== "file" &&
                 data !== "id" &&
                 data !== "vegan" && (
-                  <Typography variant="h6">
+                  <Typography key={data} variant="h6">
                     {capitalizeFirstLetter(data)}: {choices[data]}
                   </Typography>
                 )
             )}
           </section>
           <section className={classes.section}>
-            <Button className={classes.saveButton}>Valider</Button>
+            <Button
+              onClick={() => create(choices)}
+              className={classes.saveButton}>
+              Valider
+            </Button>
           </section>
         </div>
       </Carousel>
@@ -364,6 +366,8 @@ const Questions = (props) => {
   );
 };
 
-Questions.propTypes = {};
+Questions.propTypes = {
+  create: PropTypes.func.isRequired,
+};
 
 export default Questions;
