@@ -14,6 +14,7 @@ import {
   Restaurant as RestaurantIcon,
   Euro as EuroICon,
   ArrowBack as ArrowBackIcon,
+  Favorite,
 } from "@material-ui/icons";
 
 // COMPONENTS
@@ -40,12 +41,13 @@ const data = {
     y: 43.59908136314234,
   },
 };
-const Restaurant = (props) => {
+const Restaurant = ({ addToFavorite }) => {
   window.scrollTo(0, 0);
   const classes = useStyles();
   const history = useHistory();
   const mobile = useMediaQuery("(max-width:600px)");
   const tablet = useMediaQuery("(max-width:1025px)");
+  const [isLiked, setIsLiked] = React.useState(false);
 
   let isVeganFriendly;
   if (data.vegan) {
@@ -60,20 +62,31 @@ const Restaurant = (props) => {
     );
   }
 
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+    addToFavorite("restaurant.id", "user.id");
+  };
+
   let goBackButton;
+  let favorisButton;
   if (mobile) {
     goBackButton = (
       <IconButton
         size="small"
-        style={{
-          position: "absolute",
-          top: 20,
-          left: 20,
-          backgroundColor: "#fff",
-          color: "#000",
-        }}
+        className={classes.gobackIcon}
         onClick={() => history.goBack()}>
         <ArrowBackIcon />
+      </IconButton>
+    );
+    favorisButton = (
+      <IconButton
+        size="small"
+        className={classes.favoriteIcon}
+        style={{
+          color: isLiked ? "red" : "#000",
+        }}
+        onClick={handleLike}>
+        <Favorite />
       </IconButton>
     );
   }
@@ -82,6 +95,7 @@ const Restaurant = (props) => {
     <>
       {/*...........................Carousel........................... */}
 
+      {favorisButton}
       <Carousel />
       {goBackButton}
 
@@ -174,6 +188,8 @@ const Restaurant = (props) => {
   );
 };
 
-Restaurant.propTypes = {};
+Restaurant.propTypes = {
+  addToFavorite: PropTypes.func.isRequired,
+};
 
 export default Restaurant;

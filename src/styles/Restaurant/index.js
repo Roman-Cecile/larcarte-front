@@ -14,6 +14,11 @@ const useStyles = makeStyles((theme) => {
     marginTop: 8,
   };
 
+  const icon = {
+    position: "absolute",
+    top: 20,
+  };
+
   return {
     flex: {
       display: "flex",
@@ -77,6 +82,20 @@ const useStyles = makeStyles((theme) => {
     map: {
       height: 400,
       with: "100%",
+    },
+
+    gobackIcon: {
+      ...icon,
+      left: 20,
+      backgroundColor: "#fff",
+      color: "#000",
+    },
+
+    favoriteIcon: {
+      ...icon,
+      right: 20,
+      backgroundColor: "transparent",
+      zIndex: 1,
     },
   };
 });

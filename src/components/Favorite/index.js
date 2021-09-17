@@ -35,6 +35,7 @@ const Favorite = (props) => {
       <main style={{ marginTop: 30, display: isMobile ? "" : "flex" }}>
         {datas.map((restaurant) => (
           <NavLink
+            key={restaurant.name}
             to={`/restaurant/${restaurant.name}`}
             style={{ textDecoration: "none", color: "#000" }}>
             <Grid
