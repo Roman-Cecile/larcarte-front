@@ -29,6 +29,20 @@ const restaurant = (store) => (next) => (action) => {
       break;
     }
 
+    case restaurantAction.ADD_TO_FAVORITE: {
+      axios({
+        method: "POST",
+        url: `${url}/login`,
+      })
+        .then(({ data }) => {
+          // console.log({ data });
+        })
+        .catch((error) => {
+          console.trace(error);
+        });
+      break;
+    }
+
     default:
       next(action);
   }

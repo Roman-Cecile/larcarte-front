@@ -7,6 +7,14 @@ const restaurantAction = {
       datas,
     };
   },
+
+  addToFavorite(restaurantId, userId) {
+    return {
+      type: restaurant.ADD_TO_FAVORITE,
+      restaurantId,
+      userId,
+    };
+  },
 };
 
 export default restaurantAction;

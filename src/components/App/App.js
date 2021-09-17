@@ -5,7 +5,6 @@ import NavbarDesktop from "../Desktop/Navbar";
 
 // Components
 import Home from "../Home";
-import Restaurant from "../Restaurant";
 import Favorite from "../Favorite";
 import JoinUs from "../JoinUs";
 import Map from "../Map";
@@ -17,6 +16,9 @@ import City from "../City";
 // Containers
 import { Form } from "../../containers/Form";
 import { User } from "../../containers/User";
+import { Restaurant } from "../../containers/Restaurant";
+
+// HOOKS
 import useResponsive from "../../utils/personalHooks/responsive";
 
 // MUI
