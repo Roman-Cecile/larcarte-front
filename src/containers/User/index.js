@@ -4,12 +4,16 @@ import { connect } from "react-redux";
 import userComponent from "../../components/User";
 
 // ACTIONS
-// import action from "";
+import userAction from "../../actions/User/actionCreators";
 
 const mapStateToProps = (state) => ({
   isLogin: state.userReducer.isLogin,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  logOut: () => {
+    dispatch(userAction.logOut());
+  },
+});
 
 export const User = connect(mapStateToProps, mapDispatchToProps)(userComponent);
