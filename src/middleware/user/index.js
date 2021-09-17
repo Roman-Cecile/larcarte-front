@@ -5,6 +5,7 @@ import { url } from "../../utils/constants";
 
 // Actions Types
 import loginAction from "../../actions/Form/actionType";
+import userAction from "../../actions/User/actionType";
 
 axios.defaults.withCredentials = true;
 const user = (store) => (next) => (action) => {
@@ -31,6 +32,21 @@ const user = (store) => (next) => (action) => {
       })
         .then(({ data }) => {
           // console.log({ data });
+        })
+        .catch((error) => {
+          console.trace(error);
+        });
+      break;
+    }
+
+    case userAction.LOGOUT: {
+      axios({
+        method: "DELETE",
+        url: `${url}/login`,
+      })
+        .then(({ data }) => {
+          localStorage.clear();
+          window.location.reload();
         })
         .catch((error) => {
           console.trace(error);

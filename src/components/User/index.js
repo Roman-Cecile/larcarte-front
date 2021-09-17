@@ -19,7 +19,7 @@ const datas = {
   inscription: 2021,
   email: "roman@hotmail.com",
 };
-const User = ({ isLogin }) => {
+const User = ({ isLogin, logOut }) => {
   window.scrollTo(0, 0);
   const classes = useStyles();
   const isMobile = useResponsive();
@@ -59,6 +59,7 @@ const User = ({ isLogin }) => {
             Inscrit depuis {datas.inscription}
           </Typography>
           <Button
+            onClick={logOut}
             className={classes.button}
             size="small"
             variant="contained"
@@ -103,6 +104,9 @@ const User = ({ isLogin }) => {
   );
 };
 
-User.propTypes = {};
+User.propTypes = {
+  isLogin: PropTypes.bool.isRequired,
+  logOut: PropTypes.func.isRequired,
+};
 
 export default User;
